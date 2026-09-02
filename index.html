@@ -10,16 +10,18 @@
 <body>
 
     <header>
-        <div class="nav-logo" onclick="navegarA('inicio')">☕ Aroma</div>
-        <div class="header-nav-btns">
-            <button class="header-btn" onclick="navegarA('inicio')" title="Inicio">🏠</button>
-            <button class="header-btn" onclick="abrirModalInventario()" title="Inventario">📦 <span id="totalProductosCount">0</span></button>
-            <button class="header-btn" onclick="abrirModalClientes()" title="Clientes">👥</button>
-            <button class="header-btn" onclick="abrirModalProveedores()" title="Proveedores">🚚</button>
-            <button class="header-btn" onclick="pedirAccesoHistorial()" title="Historial">📊</button>
-            <button class="cart-badge-btn" onclick="abrirModalCompra()" title="Carrito">🛒 <span id="cartCount">0</span></button>
-        </div>
+        <div class="nav-logo" onclick="navegarA('inicio')">☕ Aroma & Tradición</div>
     </header>
+
+    <!-- Barra de Navegación Flotante Inferior (Fácil acceso con el pulgar) -->
+    <div class="header-nav-btns">
+        <button class="header-btn" onclick="navegarA('inicio')" title="Inicio">🏠</button>
+        <button class="header-btn" onclick="abrirModalInventario()" title="Inventario">📦 <span id="totalProductosCount">0</span></button>
+        <button class="header-btn" onclick="abrirModalClientes()" title="Clientes">👥</button>
+        <button class="header-btn" onclick="abrirModalProveedores()" title="Proveedores">🚚</button>
+        <button class="header-btn" onclick="pedirAccesoHistorial()" title="Historial">📊</button>
+        <button class="cart-badge-btn" onclick="abrirModalCompra()" title="Carrito">🛒 <span id="cartCount">0</span></button>
+    </div>
 
     <!-- VISTA INICIO -->
     <div id="vista-inicio">
@@ -206,7 +208,7 @@
                 </div>
                 <div class="form-group">
                     <label>Sugerencias o Comentarios del Pedido (Manual):</label>
-                    <textarea id="txtSugerenciaCliente" rows="2" placeholder="Escribe aquí tus indicaciones especiales..." style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px; font-family:inherit;"></textarea>
+                    <textarea id="txtSugerenciaCliente" rows="2" placeholder="Escribe aquí tus indicaciones especiales..."></textarea>
                 </div>
                 <div class="modal-actions">
                     <button type="button" class="btn-cancel" onclick="cancelarPedidoForm()">Cancelar Pedido</button>
