@@ -10,14 +10,14 @@
 <body>
 
     <header>
-        <div class="nav-logo" onclick="navegarA('inicio')">☕ Aroma & Tradición</div>
+        <div class="nav-logo" onclick="navegarA('inicio')">☕ Aroma</div>
         <div class="header-nav-btns">
-            <button class="header-btn" onclick="navegarA('inicio')">🏠 Inicio</button>
-            <button class="header-btn" onclick="abrirModalInventario()">📦 Inventario (<span id="totalProductosCount">0</span>)</button>
-            <button class="header-btn" onclick="abrirModalClientes()">👥 Clientes</button>
-            <button class="header-btn" onclick="abrirModalProveedores()">🚚 Proveedores</button>
-            <button class="header-btn" onclick="pedirAccesoHistorial()">📊 Historial</button>
-            <button class="cart-badge-btn" onclick="abrirModalCompra()">🛒 Carrito (<span id="cartCount">0</span>)</button>
+            <button class="header-btn" onclick="navegarA('inicio')">🏠</button>
+            <button class="header-btn" onclick="abrirModalInventario()">📦 <span id="totalProductosCount">0</span></button>
+            <button class="header-btn" onclick="abrirModalClientes()">👥</button>
+            <button class="header-btn" onclick="abrirModalProveedores()">🚚</button>
+            <button class="header-btn" onclick="pedirAccesoHistorial()">📊</button>
+            <button class="cart-badge-btn" onclick="abrirModalCompra()">🛒 <span id="cartCount">0</span></button>
         </div>
     </header>
 
@@ -79,7 +79,7 @@
 
         <div class="container">
             <div style="margin-bottom: 20px;">
-                <button class="header-btn" style="background: var(--primary);" onclick="navegarA('inicio')">← Volver al Inicio</button>
+                <button class="header-btn" style="background: var(--primary); color: white;" onclick="navegarA('inicio')">← Volver al Inicio</button>
             </div>
             <h2 id="tituloCategoria" class="section-title">Menú Completo</h2>
             <div id="gridProductos" class="grid-productos"></div>
@@ -112,7 +112,7 @@
         </div>
     </div>
 
-    <!-- MODAL REPONER STOCK (ACTUALIZADO CON PROVEEDOR Y COSTO AUTOMÁTICO) -->
+    <!-- MODAL REPONER STOCK -->
     <div id="modalReponerStock" class="modal-overlay hidden">
         <div class="modal-content" style="max-width: 450px;">
             <div class="modal-header">
@@ -243,7 +243,7 @@
             </div>
             <div style="text-align: center;" class="no-print">
                 <button class="btn-confirm" onclick="window.print()">🖨️ Imprimir Factura</button>
-                <button class="header-btn" style="background: var(--primary); margin-left: 10px;" onclick="cerrarFactura()">Cerrar</button>
+                <button class="header-btn" style="background: var(--primary); margin-left: 10px; color: white;" onclick="cerrarFactura()">Cerrar</button>
             </div>
         </div>
     </div>
