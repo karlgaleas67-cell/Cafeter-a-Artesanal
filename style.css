@@ -17,48 +17,53 @@
 body {
     background-color: var(--bg-light);
     color: var(--text-main);
+    padding-top: 65px; /* Espacio para la barra fija superior */
 }
 
 .hidden {
     display: none !important;
 }
 
+/* Header Fijo y Ordenado */
 header {
     background: #fff;
-    padding: 15px 30px;
+    padding: 10px 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    position: sticky;
+    position: fixed;
     top: 0;
-    z-index: 100;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
 .nav-logo {
     font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: var(--primary-dark);
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .header-nav-btns {
     display: flex;
-    gap: 10px;
+    gap: 6px;
     align-items: center;
-    flex-wrap: wrap;
 }
 
 .header-btn, .cart-badge-btn {
     background: #f4f0eb;
     border: none;
-    padding: 8px 14px;
-    border-radius: 20px;
+    padding: 6px 10px;
+    border-radius: 16px;
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-weight: 500;
     transition: background 0.2s;
+    white-space: nowrap;
 }
 
 .header-btn:hover, .cart-badge-btn:hover {
@@ -88,12 +93,12 @@ header {
 
 .hero-content h2 {
     font-family: 'Playfair Display', serif;
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     margin-bottom: 10px;
 }
 
 .hero-content p {
-    font-size: 1.1rem;
+    font-size: 1rem;
     margin-bottom: 20px;
 }
 
