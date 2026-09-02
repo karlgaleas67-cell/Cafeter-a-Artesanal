@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafetería Artesanal - Aroma & Tradición</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="nav-logo" onclick="navegarA('inicio')">☕ Aroma & Tradición</div>
+        <div class="header-nav-btns">
+            <button class="header-btn" onclick="navegarA('inicio')">🏠 Inicio</button>
+            <button class="header-btn" onclick="abrirModalInventario()">📦 Inventario (<span id="totalProductosCount">0</span>)</button>
+            <button class="header-btn" onclick="abrirModalClientes()">👥 Clientes</button>
+            <button class="header-btn" onclick="abrirModalProveedores()">🚚 Proveedores</button>
+            <button class="header-btn" onclick="pedirAccesoHistorial()">📊 Historial</button>
+            <button class="cart-badge-btn" onclick="abrirModalCompra()">🛒 Carrito (<span id="cartCount">0</span>)</button>
+        </div>
+    </header>
+
+    <!-- VISTA INICIO -->
+    <div id="vista-inicio">
+        <section class="hero-section">
+            <div class="hero-content">
+                <h2>El Mejor Café de Origen y Desayunos</h2>
+                <p>Disfruta de momentos inolvidables con nuestros productos artesanales elaborados con amor y dedicación.</p>
+                <button class="hero-cta-btn" onclick="navegarA('todos')">Ver Menú Completo</button>
+            </div>
+        </section>
+
+        <div class="container">
+            <h3 class="section-title">Categorías Populares</h3>
+            <div class="grid-productos">
+                <div class="product-card cat-card-desayunos" onclick="navegarA('desayunos')" style="cursor: pointer;">
+                    <img src="https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=400&q=80" alt="Desayunos">
+                    <div class="card-body">
+                        <div class="card-title">Desayunos Especiales</div>
+                        <p style="font-size: 0.85rem; color: #666;">Comienza tu día con energía.</p>
+                    </div>
+                </div>
+                <div class="product-card cat-card-cafes" onclick="navegarA('cafes')" style="cursor: pointer;">
+                    <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=400&q=80" alt="Cafés">
+                    <div class="card-body">
+                        <div class="card-title">Cafés de Origen</div>
+                        <p style="font-size: 0.85rem; color: #666;">Aromas y sabores únicos.</p>
+                    </div>
+                </div>
+                <div class="product-card cat-card-bebidas" onclick="navegarA('bebidas')" style="cursor: pointer;">
+                    <img src="https://images.unsplash.com/photo-1613478223719-2ab802602423?auto=format&fit=crop&w=400&q=80" alt="Bebidas">
+                    <div class="card-body">
+                        <div class="card-title">Bebidas & Jugos</div>
+                        <p style="font-size: 0.85rem; color: #666;">Refresca tu tarde.</p>
+                    </div>
+                </div>
+                <div class="product-card cat-card-postres" onclick="navegarA('postres')" style="cursor: pointer;">
+                    <img src="https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=400&q=80" alt="Postres">
+                    <div class="card-body">
+                        <div class="card-title">Postres Artesanales</div>
+                        <p style="font-size: 0.85rem; color: #666;">El toque dulce perfecto.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VISTA PRODUCTOS / MENÚ -->
+    <div id="vista-productos" class="hidden">
+        <div class="categories-bar">
+            <button class="pill-btn active" onclick="filtrarCategoria('todos', this)">Todo</button>
+            <button class="pill-btn" onclick="filtrarCategoria('desayunos', this)">Desayunos</button>
+            <button class="pill-btn" onclick="filtrarCategoria('cafes', this)">Cafés</button>
+            <button class="pill-btn" onclick="filtrarCategoria('bebidas', this)">Bebidas</button>
+            <button class="pill-btn" onclick="filtrarCategoria('postres', this)">Postres</button>
+            <button class="pill-btn" onclick="filtrarCategoria('ofertas', this)">Ofertas</button>
+        </div>
+
+        <div class="container">
+            <div style="margin-bottom: 20px;">
+                <button class="header-btn" style="background: var(--primary);" onclick="navegarA('inicio')">← Volver al Inicio</button>
+            </div>
+            <h2 id="tituloCategoria" class="section-title">Menú Completo</h2>
+            <div id="gridProductos" class="grid-productos"></div>
+        </div>
+    </div>
+
+    <!-- MODAL CLIENTES -->
+    <div id="modalClientes" class="modal-overlay hidden">
+        <div class="modal-content" style="max-width: 750px;">
+            <div class="modal-header">
+                <h3>👥 Consultar Clientes Frecuentes</h3>
+                <button class="close-modal-btn" onclick="cerrarModalClientes()">&times;</button>
+            </div>
+            <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">Base de datos de clientes registrados automáticamente al comprar</p>
+            <div style="overflow-x: auto; max-height: 350px;">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Teléfono</th>
+                            <th>Ciudad</th>
+                            <th>Pedidos</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaClientesBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL REPONER STOCK (ACTUALIZADO CON PROVEEDOR Y COSTO AUTOMÁTICO) -->
+    <div id="modalReponerStock" class="modal-overlay hidden">
+        <div class="modal-content" style="max-width: 450px;">
+            <div class="modal-header">
+                <h3>🛒 Registrar Orden de Compra a Proveedor</h3>
+                <button class="close-modal-btn" onclick="cerrarModalReponer()">&times;</button>
+            </div>
+            <p id="reponerProductoTitulo" style="margin-bottom: 12px; font-weight: 600; font-size: 1rem; color: var(--primary-dark);"></p>
+            
+            <form onsubmit="confirmarReponerStock(event)">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div class="form-group">
+                        <label>Seleccionar Proveedor:</label>
+                        <select id="selectProveedorReponer" onchange="calcularCostoTotalReponer()" required>
+                            <option value="">-- Seleccione --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Cantidad a Comprar:</label>
+                        <input type="number" id="txtCantidadReponer" min="1" value="10" oninput="calcularCostoTotalReponer()" required>
+                    </div>
+                </div>
+
+                <div style="background: #fdfaf6; border: 1px solid #e8e1d7; padding: 12px; border-radius: 8px; margin: 12px 0;">
+                    <div style="font-size: 0.9rem; margin-bottom: 4px;">Insumo: <span id="lblInsumoSeleccionado" style="font-weight: 500;">--</span></div>
+                    <div style="font-size: 0.9rem; margin-bottom: 6px;">Costo Unitario: <span id="lblCostoUnitario" style="font-weight: 500;">L. 0.00</span></div>
+                    <div style="font-size: 1rem; font-weight: 700; color: var(--primary);">Total a Gastar Automático: <span id="lblTotalGastar">L. 0.00</span></div>
+                </div>
+
+                <div class="modal-actions" style="margin-top: 15px;">
+                    <button type="button" class="btn-cancel" onclick="cerrarModalReponer()">Cancelar</button>
+                    <button type="submit" class="btn-confirm" style="background: var(--success);">Procesar Pedido al Proveedor</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL CHECKOUT / COMPRA -->
+    <div id="modalCheckout" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Finalizar Pedido</h3>
+                <button class="close-modal-btn" onclick="cerrarModalCompra()">&times;</button>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <h4>Resumen del Carrito:</h4>
+                <div id="resumenCarritoLista" style="max-height: 120px; overflow-y: auto; margin-top: 8px;"></div>
+                <div style="text-align: right; margin-top: 8px; font-size: 1.1rem;">
+                    <strong>Total: <span id="lblTotalCheckout" style="color: var(--primary);">L. 0.00</span></strong>
+                </div>
+            </div>
+            <form id="checkoutForm" onsubmit="confirmarPedido(event)">
+                <div class="form-group">
+                    <label>Cliente (Sugerencias de Registrados):</label>
+                    <input type="text" id="txtNombre" list="sugerenciasClientes" placeholder="Escribe o selecciona cliente..." required autocomplete="off">
+                    <datalist id="sugerenciasClientes"></datalist>
+                </div>
+                <div class="form-group">
+                    <label>Correo Electrónico (Obligatorio incluir @):</label>
+                    <input type="text" id="txtCorreo" required placeholder="correo@ejemplo.com">
+                </div>
+                <div class="form-group">
+                    <label>Teléfono:</label>
+                    <input type="tel" id="txtTelefono" required placeholder="+504 9999-9999">
+                </div>
+                <div class="form-group">
+                    <label>Ciudad:</label>
+                    <select id="selectCiudadFiltro" onchange="actualizarColonias()">
+                        <option value="San Pedro Sula">San Pedro Sula</option>
+                        <option value="El Progreso">El Progreso</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Tipo de Entrega:</label>
+                    <select id="ddlTipoEntrega" onchange="evaluarTipoEntrega()">
+                        <option value="Envío a Domicilio">Envío a Domicilio</option>
+                        <option value="Recoger en Local">Recoger en Local</option>
+                    </select>
+                </div>
+                <div class="form-group" id="grupoEnvio">
+                    <label>Colonia / Sector:</label>
+                    <select id="ddlColonia" onchange="calcularTiempoEstimado()"></select>
+                    <small style="color: #666; display: block; margin-top: 4px;">Tiempo estimado: <span id="lblTiempoEstimado" style="font-weight: bold; color: var(--primary);">--</span></small>
+                </div>
+                <div class="form-group">
+                    <label>Método de Pago:</label>
+                    <select id="ddlPago">
+                        <option value="Efectivo contra entrega">Efectivo contra entrega</option>
+                        <option value="Tarjeta de Crédito / Débito">Tarjeta de Crédito / Débito</option>
+                        <option value="Transferencia Bancaria">Transferencia Bancaria</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Sugerencias o Comentarios del Pedido (Manual):</label>
+                    <textarea id="txtSugerenciaCliente" rows="2" placeholder="Escribe aquí tus indicaciones especiales..." style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px; font-family:inherit;"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" onclick="cancelarPedidoForm()">Cancelar Pedido</button>
+                    <button type="submit" class="btn-confirm">Confirmar y Pagar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL FACTURA -->
+    <div id="modalFactura" class="factura-fullscreen hidden">
+        <div class="factura-box">
+            <span class="factura-close-x" onclick="cerrarFactura()">&times;</span>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <h2 style="font-family: 'Playfair Display', serif; color: var(--primary-dark);">Aroma & Tradición</h2>
+                <p style="font-size: 0.85rem; color: #666;">Comprobante de Pedido / Factura</p>
+            </div>
+            <div style="font-size: 0.9rem; margin-bottom: 15px;">
+                <p><strong>Nº de Pedido:</strong> <span id="facturaId"></span></p>
+                <p><strong>Fecha:</strong> <span id="facturaFecha"></span></p>
+                <p><strong>Cliente:</strong> <span id="facturaCliente"></span></p>
+                <p><strong>Correo:</strong> <span id="facturaCorreo"></span></p>
+                <p><strong>Teléfono:</strong> <span id="facturaTelefono"></span></p>
+                <p><strong>Destino:</strong> <span id="facturaEntrega"></span></p>
+                <p><strong>Método de Pago:</strong> <span id="facturaPago"></span></p>
+                <p id="facturaSugerenciaBox" style="margin-top: 6px; font-style: italic; color: #555;"></p>
+            </div>
+            <div style="border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; padding: 10px 0; margin-bottom: 15px;">
+                <strong>Detalle de productos:</strong>
+                <div id="facturaItems" style="margin-top: 8px;"></div>
+            </div>
+            <div style="text-align: right; font-size: 1.1rem; margin-bottom: 25px;">
+                <strong>Total Pagado: <span id="facturaTotal" style="color: var(--primary);"></span></strong>
+            </div>
+            <div style="text-align: center;" class="no-print">
+                <button class="btn-confirm" onclick="window.print()">🖨️ Imprimir Factura</button>
+                <button class="header-btn" style="background: var(--primary); margin-left: 10px;" onclick="cerrarFactura()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL HISTORIAL DE PEDIDOS -->
+    <div id="modalHistorial" class="modal-overlay hidden">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <h3>Historial de Pedidos (Administrador)</h3>
+                <button class="close-modal-btn" onclick="cerrarHistorial()">&times;</button>
+            </div>
+            <div style="overflow-x: auto; max-height: 350px;">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Cliente</th>
+                            <th>Destino</th>
+                            <th>Pago</th>
+                            <th>Productos</th>
+                            <th>Total</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaPedidosBody"></tbody>
+                </table>
+            </div>
+            <div style="text-align: right; margin-top: 15px; font-size: 1.1rem;">
+                <strong>Ingresos Totales: <span id="lblIngresosTotales" style="color: var(--success);">L. 0.00</span></strong>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL PROVEEDORES -->
+    <div id="modalProveedores" class="modal-overlay hidden">
+        <div class="modal-content" style="max-width: 750px;">
+            <div class="modal-header">
+                <h3>🚚 Gestión de Proveedores</h3>
+                <button class="close-modal-btn" onclick="cerrarProveedores()">&times;</button>
+            </div>
+            <div style="overflow-x: auto; max-height: 200px; margin-bottom: 15px;">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Proveedor</th>
+                            <th>Insumo / Producto</th>
+                            <th>Costo Unit.</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaProveedoresBody"></tbody>
+                </table>
+            </div>
+            <form id="formAgregarProveedor" onsubmit="agregarNuevoProveedor(event)" style="border-top: 1px solid #eee; padding-top: 12px; background: #fdfaf6; padding: 12px; border-radius: 8px;">
+                <h4>➕ Registrar Nuevo Proveedor</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px;">
+                    <div class="form-group">
+                        <label>Nombre del Proveedor:</label>
+                        <input type="text" id="nuevoProvNombre" placeholder="Ej. Distribidora S.A." required>
+                    </div>
+                    <div class="form-group">
+                        <label>Insumo o Producto:</label>
+                        <input type="text" id="nuevoProvInsumo" placeholder="Ej. Café en grano" required>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-top: 8px;">
+                    <label>Costo Unitario (L.):</label>
+                    <input type="number" step="0.01" id="nuevoProvCosto" placeholder="0.00" min="0" required>
+                </div>
+                <button type="submit" class="btn-confirm" style="width: 100%; margin-top: 10px;">Añadir Proveedor</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL INVENTARIO -->
+    <div id="modalInventario" class="modal-overlay hidden">
+        <div class="modal-content" style="max-width: 700px;">
+            <div class="modal-header">
+                <h3>Control General de Inventario</h3>
+                <button class="close-modal-btn" onclick="cerrarInventario()">&times;</button>
+            </div>
+            <div style="overflow-x: auto; max-height: 400px;">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Producto</th>
+                            <th>Categoría</th>
+                            <th>Precio</th>
+                            <th>Stock</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaInventarioBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTIFICACIÓN TOAST -->
+    <div id="toastNotification" class="toast hidden"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
